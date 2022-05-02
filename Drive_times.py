@@ -2,14 +2,10 @@ import json
 import pandas as pd
 import requests
 from datetime import timedelta, datetime
-import timeit
 
 def new_json(use_date):
     headers = {
-            'x-api-key': '0e6160bb-d3e0-4a76-b474-250c13f6eed0',
-            'User-Agent': 'Intern_Script',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            #removed for data security
             }
     file_date=datetime.strftime(use_date,'%Y-%m-%d')
     response = requests.get("https://api.keeptruckin.com/v1/logs?start_date="+file_date+"&end_date="+file_date+"&per_page=100", headers=headers)
@@ -38,11 +34,4 @@ def main():
     primarydf.to_csv('drivetimes'+startdate+'_'+enddate+'.csv')
     return 
 
-start = timeit.default_timer()
-
 main()
-
-stop = timeit.default_timer()
-
-print('Time: ', stop - start) 
-
