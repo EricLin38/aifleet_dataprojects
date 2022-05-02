@@ -1,4 +1,3 @@
-#READ ME
 #script reads API for given date range to return formatted CSV file containing
 #driver end times adjusted for respective local time zones with Daylight Savings
 #time accounted for
@@ -11,7 +10,6 @@ from datetime import timedelta
 from geopy.geocoders import Nominatim
 from timezonefinder import TimezoneFinder
 from us import states
-import timeit
 
 #set static variables needed throughout script
 daylightstart2022= datetime(2022,3,13)
@@ -79,10 +77,7 @@ not_exceptions={
 #requests data from the api using a specific date, returns a json file with the data
 def new_json(date):
     headers = {
-        'x-api-key': '0e6160bb-d3e0-4a76-b474-250c13f6eed0',
-        'User-Agent': 'Intern_Script',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        #removed for data security
         }
     file_date=datetime.strftime(date,'%Y-%m-%d')
     response = requests.get("https://api.keeptruckin.com/v1/logs?start_date="+file_date+"&end_date="+file_date+"&per_page=100", headers=headers)
@@ -145,11 +140,4 @@ def main():
     primarydf.to_csv('endtimes'+startdate+'_'+enddate+'.csv')
     return
 
-
-start = timeit.default_timer()
-
 main()
-
-stop = timeit.default_timer()
-
-print('Time: ', stop - start) 
