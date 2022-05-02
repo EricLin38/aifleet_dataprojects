@@ -88,10 +88,7 @@ def is_daylight(day):
 #run API call to retrieve json file
 def new_json(use_date):
     headers = {
-            'x-api-key': '0e6160bb-d3e0-4a76-b474-250c13f6eed0',
-            'User-Agent': 'Intern_Script',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            #removed for data security
             }
     file_date=datetime.strftime(use_date,'%Y-%m-%d')
     response = requests.get("https://api.keeptruckin.com/v1/logs?start_date="+file_date+"&end_date="+file_date+"&per_page=100", headers=headers)
@@ -183,43 +180,6 @@ def finddrive(data, date):
     x.index=[dates]
     return x
 
-'''
-#main function to write drive times dataframe
-def dt_main():
-    startdate = input('Enter Start Date (YYYY-MM-DD): ') 
-    enddate = input('Enter End Date (YYYY-MM-DD): ')    
-    date_list = pd.date_range(start=startdate,end=enddate)
-    primarydf=pd.DataFrame()
-    for day in date_list:
-        primarydf=pd.concat([primarydf,finddrive(new_json(day),day)], axis=0)
-    primarydf.to_csv('drivetimes'+startdate+'_'+enddate+'.csv')
-    return 
-
-#main function to write start times dataframe
-def st_main():
-    startdate = input('Enter Start Date (YYYY-MM-DD): ') 
-    enddate = input('Enter End Date (YYYY-MM-DD): ')
-        
-    date_list = pd.date_range(start=startdate,end=enddate)
-    primarydf=pd.DataFrame()
-    for day in date_list:
-        primarydf=pd.concat([primarydf,findstart(new_json(day),day)], axis=0)
-    primarydf.to_csv('start_times'+startdate+'_'+enddate+'.csv')
-    return 
-
-#main function to write end times dataframe
-def et_main():
-    startdate = input('Enter Start Date (YYYY-MM-DD): ') 
-    enddate = input('Enter End Date (YYYY-MM-DD): ')
-        
-    date_list = pd.date_range(start=startdate,end=enddate)
-    primarydf=pd.DataFrame()
-    for day in date_list:
-        primarydf=pd.concat([primarydf,findend(new_json(day),day)], axis=0)
-    primarydf.to_csv('endtimes'+startdate+'_'+enddate+'.csv')
-    return 
-'''
-
 def main():
     question = input("Calculate Start times, End times, or Drive times? (Type s/e/d)")
     startdate = input('Enter Start Date (YYYY-MM-DD): ') 
@@ -242,11 +202,4 @@ def main():
     else:
         print('Input Invalid, Program Ending')
     return 
-
-start = timeit.default_timer()
-
 main()
-
-stop = timeit.default_timer()
-
-print('Time: ', stop - start) 
