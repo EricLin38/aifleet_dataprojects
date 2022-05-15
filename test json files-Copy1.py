@@ -125,10 +125,7 @@ def to_df(date, dic):
 #logs contain the best-formatted data needed to process daily events
 def pull_logs(use_date):
     headers = {
-            'x-api-key': '0e6160bb-d3e0-4a76-b474-250c13f6eed0',
-            'User-Agent': 'DataOpsTeam',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'blocked for privacy'
             }
     file_date=datetime.strftime(use_date,'%Y-%m-%d')
     #pulls only 100 entries, script will need updating once we grow beyond 100 drivers
@@ -139,9 +136,7 @@ def driver_perf_events(use_date):
     file_date=datetime.strftime(use_date,'%Y-%m-%d')
     url = "https://api.keeptruckin.com/v1/driver_performance_events?start_date="+file_date+"&end_date="+file_date+"&per_page=100&page_no=1"
     headers = {
-        "Accept": "application/json",
-        'Content-Type': 'application/json',
-        "X-Api-Key": "0e6160bb-d3e0-4a76-b474-250c13f6eed0"
+        'blocked for privacy'
     }
     response = requests.get(url, headers=headers)
     return json.loads(response.text)
@@ -149,9 +144,7 @@ def scorecard_summary(use_date):
     file_date=datetime.strftime(use_date,'%Y-%m-%d')
     url = "https://api.keeptruckin.com/v1/scorecard_summary?start_date="+file_date+"&end_date="+file_date+"&per_page=100&page_no=1"
     headers = {
-        "Accept": "application/json",
-        'Content-Type': 'application/json',
-        "X-Api-Key": "0e6160bb-d3e0-4a76-b474-250c13f6eed0"
+        'blocked for privacy'
     }
     response = requests.get(url, headers=headers)
     return json.loads(response.text)
