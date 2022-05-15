@@ -204,38 +204,6 @@ def main():
     return primarydf
 
 
-# In[2]:
-
-
-#script to calculate home times for a given period by finding monday start times and subtracting the 
-#corresponding Fri/Sat/Sun end time for each driver to find how long they spent at home for a given weekend
-def main():
-    startdate = input('Enter Start Date (YYYY-MM-DD): ') 
-    enddate = input('Enter End Date (YYYY-MM-DD): ')
-    date_list = pd.date_range(start=startdate,end=enddate)
-    monday_start=[i for i in date_list if i.day_name() == 'Monday']
-    weekend=[i for i in date_list if i.day_name() == 'Friday' or i.day_name() == 'Saturday' or i.day_name() == "Sunday"]
-    primarydf=pd.DataFrame()
-    for day in date_list:
-        if day in monday_start:
-            primarydf=pd.concat([primarydf,findstart(new_json(day),day)], axis=0)
-        elif day in weekend:
-            primarydf=pd.concat([primarydf,findend(new_json(day),day)], axis=0)
-    primarydf.to_csv('mon,weekend data ytd.csv')
-    return
-
-start = timeit.default_timer()
-
-main()
-
-stop = timeit.default_timer()
-
-print('Time: ', stop - start) 
-
-
-# In[3]:
-
-
 #calculating sleeper berth periods
 def sleepers(data,date):
     temp, coordinates, last_start, last_coord={}
@@ -266,7 +234,7 @@ def sleepers(data,date):
     
     return to_df(date, first_final), to_df(date, last_final)
 
-def main():
+def test_sleep():
     startdate = '2022-04-01'
     enddate = '2022-04-05'  
     date_list = pd.date_range(start=startdate,end=enddate)
@@ -280,62 +248,3 @@ def main():
         awake.to_excel(writer, sheet_name='awake')
         bedtime.to_excel(writer, sheet_name='bedtime')
     return
-
-
-# In[ ]:
-
-
-startdate='2022-05-07'
-enddate='2022-05-07'
-date_list=pd.date_range(start=startdate,end=enddate)
-[print(json.dumps(driver_perf_events(day), indent=4, sort_keys=True)) for day in date_list]
-#print(json.dumps(scorecard_summary(startdate), indent=4, sort_keys=True))
-
-
-# In[ ]:
-
-
-#file=json.load(open('response0302.json'))
-#file=json.load(open('response0301.json'))
-use_date=datetime(2022,5,2)
-print(json.dumps(pull_logs(use_date), indent=4, sort_keys=True))
-#l = new_json(use_date)
-#for y in l["logs"]:
-#    print(len(y["log"]["events"]))
-
-
-# In[4]:
-
-
-use_date=datetime(2022,5,2)
-x=pull_logs(use_date)
-print(findend(x, use_date))
-
-
-# In[6]:
-
-
-for log in x['logs']:
-    for y in log['log']['events']:
-        print(y['event']['location'])
-
-
-# In[10]:
-
-
-x, y,z=1, 2, 3
-
-
-# In[11]:
-
-
-print(x)
-print(y)
-print(z)
-
-
-# In[ ]:
-
-
-
-
